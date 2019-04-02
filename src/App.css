@@ -1,16 +1,13 @@
 .App {
   text-align: center;
+  background-color: #263d6d;
+  height:100vh;
+  
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
-}
 
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -19,15 +16,12 @@
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.TopContent {
+  border-color:white;
+  border-style:solid;
+  width:100vw;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.InnerTopContent{
+  
 }

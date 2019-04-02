@@ -1,29 +1,19 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Main from './components/Main';
 
 class App extends Component {
   render() {
-    let re = new RegExp(/g/);
-    
-    console.log(re.exec('good bye'));
-    console.log(re.exec('horseg'))
+
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
+         <h1>Upper nav page</h1>
         </header>
+        <h2>The main web page with information</h2>
+        <Main/>
+        
       </div>
     );
   }
