@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PrintServiceList from './PrintServiceList';
 import PrintServiceRequests from './PrintServiceRequests';
 import SelectStatus from './SelectStatus';
+import TimeRange from './TimeRange';
 
 
 class Main extends Component {
@@ -17,6 +18,9 @@ class Main extends Component {
         if (data.service_request_id !== null) {
             this.setState({serviceRequests:data})
         }
+        if (data.callbackid === "timerange") {
+            console.log("timerange incoming")
+        }
     }
     
     render() {
@@ -29,8 +33,9 @@ class Main extends Component {
                     <div className="InnerTopContent">
                         <h1>Hello world!</h1>
                         {/* <PrintServiceList/> */}
-                        <PrintServiceRequests callback={this.callbackFunction}/>
+                        {/* <PrintServiceRequests callback={this.callbackFunction}/> */}
                         <SelectStatus callback={this.callbackFunction}/>
+                        <TimeRange callback={this.callbackFunction}/>
                     </div>
                 </div>
 
