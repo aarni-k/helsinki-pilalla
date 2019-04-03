@@ -14,12 +14,12 @@ class PrintServiceList extends Component {
     render() {
         const serviceItems = this.state.serviceList.map(
             (values) => {
-            return <li>{values.service_name}</li>
+            return <li key={values.service_code}>{values.service_name}</li>
             }
             )
         return (
             <div>
-                                <ul>
+                <ul>
                 {serviceItems}
                 </ul>
             </div>
