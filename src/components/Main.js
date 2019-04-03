@@ -32,10 +32,10 @@ class Main extends Component {
                 <div className="TopContent">
                     <div className="InnerTopContent">
                         <h1>Hello world!</h1>
-                        {/* <PrintServiceList/> */}
-                        {/* <PrintServiceRequests callback={this.callbackFunction}/> */}
+                        <PrintServiceList/> */}
                         <SelectStatus callback={this.callbackFunction}/>
                         <TimeRange callback={this.callbackFunction}/>
+                        {/* <PrintServiceRequests callback={this.callbackFunction}/> */}
                     </div>
                 </div>
 
