@@ -9,8 +9,9 @@ class PrintServiceList extends Component {
                 console.log(data,"Service List")
                 this.setState({serviceList:data})
             })
-        
 }
+
+
     render() {
         const serviceItems = this.state.serviceList.map(
             (values) => {

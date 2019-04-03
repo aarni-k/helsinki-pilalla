@@ -4,7 +4,8 @@ import { getAllServiceRequests } from './serviceclient';
 class PrintServiceRequests extends Component {
 
     componentDidMount(){
-        getAllServiceRequests("2806").then(data => {console.log(data)})
+        getAllServiceRequests("2806").then(data => this.props.callback(data))
+        this.props.callback()
     }
 
     render() {

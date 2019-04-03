@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
 import PrintServiceList from './PrintServiceList';
+import PrintServiceRequests from './PrintServiceRequests';
 
 
 class Main extends Component {
+
+    callbackFunction = (data) => {
+        console.log(data,"Callback fired, Main.js")
+    }
 
     render() {
 
@@ -12,7 +17,8 @@ class Main extends Component {
                 <div className="TopContent">
                     <div className="InnerTopContent">
                         <h1>Hello world!</h1>
-                        <PrintServiceList />
+                        <PrintServiceList/>
+                        <PrintServiceRequests callback={this.callbackFunction}/>
                     </div>
                 </div>
 
