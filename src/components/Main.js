@@ -5,6 +5,7 @@ import SelectStatus from './SelectStatus';
 import SelectTimeRange from './SelectTimeRange';
 import Button from 'react-bootstrap/Button'
 import { getAllServiceRequests } from './serviceclient';
+import { regExPortal } from './regexclient';
 
 
 
@@ -18,20 +19,31 @@ class Main extends Component {
     }
     
     componentDidMount() {
-        this.showResults();
+        //Demon ajaksi pois
+        // this.showResults();
+        this.regExDemoF();
     }
 
     showResults = () => {      
+        // ProgressBar point #1
             getAllServiceRequests(this.state.status,
                 this.state.serviceCode,
                 this.state.startDate,
                 this.state.endDate)
                 .then((data) => {
+        // ProgresBar point #3
                     console.log(data,"getAllServiceRequests data before setState")
-                    this.setState({ serviceRequests: data }) })
+                    // this.setState({ serviceRequests: data }) 
+                    regExPortal(data);
+                })
                 
     }
+    regExDemoF = () => {
 
+        var hevonen = "hevonen"
+        regExPortal(hevonen);
+    }
+        
     callbackFunction = (data) => {
         // console.log(data, "Callback fired, Main.js")
         if (data.status !== undefined) {
@@ -65,7 +77,7 @@ class Main extends Component {
                 return <Button key={value.service_request_id} value={value.servicerequest_id}>{value.agency_responsible} / {value.service_name}</Button>
             })
         }
-        console.log(this.state, "State in render, Main.js")
+        // console.log(this.state, "State in render, Main.js")
         return (
             <div>
                 <Button onClick={this.btnSearch} value={this.state}>Hae!</Button>
@@ -73,7 +85,7 @@ class Main extends Component {
                 <div className="TopContent">
                     <div className="InnerTopContent">
                         <h1>Hello world!</h1>
-                        <SelectServiceType callback={this.callbackFunction} />
+                        {/* <SelectServiceType callback={this.callbackFunction} /> */}
                         <SelectStatus callback={this.callbackFunction} />
                         <SelectTimeRange callback={this.callbackFunction} />
                         {/* <PrintServiceRequests callback={this.callbackFunction}/> */}

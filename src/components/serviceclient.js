@@ -27,7 +27,7 @@ export function getAllServiceRequests(status, serviceCode, startDate, endDate){
 
 
 
-    var apiBase = "https://asiointi.hel.fi/palautews/rest/v1/requests.json?extensions=true&locale=fi";
+    var apiBase = "https://asiointi.hel.fi/palautews/rest/v1/requests.json?locale=fi";
     var searchTerms = status;
 
     if (serviceCode !== "notUsed") {searchTerms += serviceCode}
