@@ -5,7 +5,7 @@ import SelectStatus from './SelectStatus';
 import SelectTimeRange from './SelectTimeRange';
 import Button from 'react-bootstrap/Button'
 import { getAllServiceRequests } from './serviceclient';
-import { regExPortal } from './regexclient';
+import { regExPortal, filterWord } from './regexclient';
 
 
 
@@ -20,8 +20,8 @@ class Main extends Component {
     
     componentDidMount() {
         //Demon ajaksi pois
-        // this.showResults();
-        this.regExDemoF();
+        this.showResults();
+        // this.regExDemoF();
     }
 
     showResults = () => {      
@@ -34,8 +34,13 @@ class Main extends Component {
         // ProgresBar point #3
                     console.log(data,"getAllServiceRequests data before setState")
                     // this.setState({ serviceRequests: data }) 
-                    regExPortal(data);
+                    // regExPortal(data);
+                    var kiitokset = filterWord(data)
+                        setTimeout(() => {
+                        this.setState({serviceRequests:kiitokset })
+                    }, 3000);
                 })
+
                 
     }
     regExDemoF = () => {
@@ -74,7 +79,10 @@ class Main extends Component {
         if (this.state.serviceRequests !== undefined) {
             
             var feedbackStories = this.state.serviceRequests.map((value) => {
-                return <Button key={value.service_request_id} value={value.servicerequest_id}>{value.agency_responsible} / {value.service_name}</Button>
+                if (value !== undefined) {
+                    return <Button>{value}</Button>
+                }
+                // return <Button key={value.service_request_id} value={value.servicerequest_id}>{value.agency_responsible} / {value.service_name}</Button>
             })
         }
         // console.log(this.state, "State in render, Main.js")
