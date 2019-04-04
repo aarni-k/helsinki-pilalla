@@ -7,6 +7,11 @@ class PrintServiceRequests extends Component {
         getAllServiceRequests("2806").then(data => this.props.callback(data))
     }
 
+    // Pitääkö tämän komponentin vain hakea service requestin kamat ilman renderöintiä VAI
+    // Hakeeko tämä komponentti valitut service requestit ja filtteröi niistä regexillä kamat
+    // Voiko filtteröinnin ottaa pois päältä?
+    // 
+
     render() {
         return (
             <div>
