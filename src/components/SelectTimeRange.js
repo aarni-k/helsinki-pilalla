@@ -15,8 +15,8 @@ class SelectTimeRange extends Component {
         return this.props.callback({callbackid:"timerange",end_date:"notUsed", start_date:"notUsed"})
         }
         if (e.target.value === "30") {var numberOfMonthsToGoBack = 1}
-        if (e.target.value === "60") {var numberOfMonthsToGoBack = 2}
-        if (e.target.value === "90") {var numberOfMonthsToGoBack = 3}
+        if (e.target.value === "60") { numberOfMonthsToGoBack = 2}
+        if (e.target.value === "90") { numberOfMonthsToGoBack = 3}
 
         var end_date = new Date();
         end_date = end_date.toISOString();

@@ -7,15 +7,16 @@ import Button from 'react-bootstrap/Button'
 import { getAllServiceRequests } from './serviceclient';
 
 
+
 class Main extends Component {
     state = {
         status: "closed",
         serviceCode: "notUsed",
         startDate: "notUsed",
         endDate: "notUsed",
-        serviceRequests: []
+        välitulokset: []
     }
-
+    
     componentDidMount() {
         this.showResults();
     }
@@ -25,7 +26,9 @@ class Main extends Component {
                 this.state.serviceCode,
                 this.state.startDate,
                 this.state.endDate)
-                .then((data) => { this.setState({ serviceRequests: data }) })
+                .then((data) => {
+                    console.log(data,"getAllServiceRequests data before setState")
+                    this.setState({ serviceRequests: data }) })
                 
     }
 
@@ -45,7 +48,7 @@ class Main extends Component {
         }
     }
 
-    // Tee hakunäppäin
+    // hakunäppäin
     btnSearch = (e) => {
         e.preventDefault();
         this.showResults();
@@ -54,11 +57,15 @@ class Main extends Component {
 
 
     render() {
+        
         // Kommentoitu pois kehittämisen ajaksi :D
-        // var feedbackStories = this.state.serviceRequests.map((value) => {
-        //     return <h1 key={value.service_request_id}>{value.agency_responsible}</h1>
-        // })
-        // console.log(this.state, "State in render, Main.js")
+        if (this.state.serviceRequests !== undefined) {
+            
+            var feedbackStories = this.state.serviceRequests.map((value) => {
+                return <Button key={value.service_request_id} value={value.servicerequest_id}>{value.agency_responsible} / {value.service_name}</Button>
+            })
+        }
+        console.log(this.state, "State in render, Main.js")
         return (
             <div>
                 <Button onClick={this.btnSearch} value={this.state}>Hae!</Button>
@@ -69,14 +76,17 @@ class Main extends Component {
                         <SelectServiceType callback={this.callbackFunction} />
                         <SelectStatus callback={this.callbackFunction} />
                         <SelectTimeRange callback={this.callbackFunction} />
-                        {/* {feedbackStories} */}
                         {/* <PrintServiceRequests callback={this.callbackFunction}/> */}
                     </div>
                 </div>
-
+                <div>
+                        {feedbackStories}
+                </div>
             </div>
         );
     }
 }
+
+
 
 export default Main;

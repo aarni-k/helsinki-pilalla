@@ -1,5 +1,3 @@
-
-
 // GET list of service_codes from Open311 API
 export function getServiceList(){
     return fetch("https://asiointi.hel.fi/palautews/rest/v1/services.json?locale=fi")
@@ -26,21 +24,21 @@ export function getAllServiceRequests(status, serviceCode, startDate, endDate){
     if (startDate !== "notUsed" && endDate !== "notUsed") {
         startDate = "&start_date=" + startDate
         endDate = "&end_date=" + endDate}
-  
+
 
 
     var apiBase = "https://asiointi.hel.fi/palautews/rest/v1/requests.json?extensions=true&locale=fi";
-    // var apiBase = "http://dev.hel.fi/open311-test/v1&"
     var searchTerms = status;
 
     if (serviceCode !== "notUsed") {searchTerms += serviceCode}
     if (startDate !== "notUsed" && endDate !== "notUsed") { searchTerms += startDate + endDate}
 
     console.log(apiBase + searchTerms,"Search Url")
-    return fetch ("http://localhost:3000")
-    return fetch (apiBase+status+serviceCode+startDate+endDate)
+    return fetch (apiBase+searchTerms)
     .then(function(response){
         return response.json();
     }
     )
 }
+
+    
