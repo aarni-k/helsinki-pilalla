@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-  background-color: #263d6d;
+  background-color: #282c34;
   height:100vh;
   
 }
@@ -19,9 +19,32 @@
 .TopContent {
   border-color:white;
   border-style:solid;
+  padding-right:1%;
+  padding-bottom:1%;
+  padding-left:1%;
+  padding-top:1%;
   width:100vw;
 }
 
 .InnerTopContent{
-  
+  display:flex;
+}
+
+.SearchButton{
+margin:1%
+}
+
+.ServiceType{
+  margin:1%
+}
+.SelectStatus{
+  margin:1%
+}
+
+.TimeRange{
+  margin:1%
+}
+
+.FeedBackItem{
+  margin:1%
 }

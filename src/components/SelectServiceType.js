@@ -30,17 +30,14 @@ class SelectServiceType extends Component {
     render() {
         const serviceItems = this.state.serviceList.map(
             (values) => {
-            return <Button key={values.service_code} onClick={this.btnSelectService} value={values.service_code}>{values.service_name}</Button>
+            return <Button variant="outline-light" key={values.service_code} onClick={this.btnSelectService} value={values.service_code}>{values.service_name}</Button>
             }
             )
         return (
-            <div>
-                <Button value="selectAll" onClick={this.btnSelectService}>Select all</Button>
-                <br/>
-                
+            <React.Fragment>
+                <Button variant="outline-light" value="selectAll" onClick={this.btnSelectService}>Kaikki</Button>              
                 {serviceItems}
-              
-            </div>
+            </React.Fragment>
         );
     }
 }

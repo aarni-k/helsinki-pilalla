@@ -34,13 +34,12 @@ class SelectTimeRange extends Component {
 
     render() {
         return (
-            <div>
-                <h1> Select thy time range!</h1>
-                <Button value="NoDate" onClick={this.dateSelector}>No time range</Button>
-                <Button value="30" onClick={this.dateSelector}>Past 30 days</Button>
-                <Button value="60" onClick={this.dateSelector}>Past 60 days</Button>
-                <Button value="90" onClick={this.dateSelector}>Past 90 days</Button>
-            </div>
+            <React.Fragment>
+                <Button variant="outline-light" value="NoDate" onClick={this.dateSelector}>No time range</Button>
+                <Button variant="outline-light" value="30" onClick={this.dateSelector}>Past 30 days</Button>
+                <Button variant="outline-light" value="60" onClick={this.dateSelector}>Past 60 days</Button>
+                <Button variant="outline-light" value="90" onClick={this.dateSelector}>Past 90 days</Button>
+            </React.Fragment>
         );
     }
 }
