@@ -4,6 +4,7 @@ import PrintServiceRequests from './PrintServiceRequests';
 import SelectStatus from './SelectStatus';
 import SelectTimeRange from './SelectTimeRange';
 import Button from 'react-bootstrap/Button'
+import Form from 'react-bootstrap/Form';
 import { getAllServiceRequests } from './serviceclient';
 import { regExPortal, filterWord } from './regexclient';
 
@@ -15,6 +16,7 @@ class Main extends Component {
         serviceCode: "notUsed",
         startDate: "notUsed",
         endDate: "notUsed",
+        searchTerm:"notUsed",
         välitulokset: []
     }
 
@@ -26,6 +28,7 @@ class Main extends Component {
 
     showResults = () => {
         // ProgressBar point #1
+        console.log(this.state.searchTerm,"search-term-show-results")
         getAllServiceRequests(this.state.status,
             this.state.serviceCode,
             this.state.startDate,
@@ -33,8 +36,9 @@ class Main extends Component {
             .then((data) => {
                 // filterWord(data)
                 // ProgresBar point #3
+                var searchterm = this.state.searchTerm
                 console.log(data, "getAllServiceRequests data before setState")
-                this.setState({ serviceRequests: filterWord(data) })
+                this.setState({ serviceRequests: filterWord(data, searchterm) })
 
             })
 
@@ -70,9 +74,14 @@ class Main extends Component {
 
     }
 
+    // filter bar functions
+    filterChanged = (e) => {
+        this.setState({searchTerm:e.target.value})
+    }
+
 
     render() {
-
+        console.log(this.state)
         // Koodaa tää paremmin :D
         if (this.state.serviceRequests !== undefined) {
 
@@ -84,7 +93,7 @@ class Main extends Component {
                         </div>
                     )
                 }
-                // return <Button key={value.service_request_id} value={value.servicerequest_id}>{value.agency_responsible} / {value.service_name}</Button>
+
             })
         }
         // console.log(this.state, "State in render, Main.js")
@@ -92,7 +101,15 @@ class Main extends Component {
             <div>
                 <div className="TopContent">
                     <div className="SearchButton">
-                        <Button variant="outline-light" onClick={this.btnSearch} value={this.state}>Hae!</Button>
+                        <Button variant="outline-light" onClick={this.btnSearch} value={this.state.searchTerm}>Hae!</Button>
+                        
+                    </div>
+                    <div className="SearchBar">
+                        <Form>
+                            <Form.Group>
+                                <Form.Control size="lg" type="text" placeholder="Suodatin" onChange={this.filterChanged}/>
+                            </Form.Group>
+                        </Form>
                     </div>
                     <div className="InnerTopContent">
                         <div className="ServiceType">

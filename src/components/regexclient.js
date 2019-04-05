@@ -42,20 +42,23 @@ export function regExPortal(data) {
     console.log(regDemo, "<- RegDemo funktion jälkeen")
 }
 
-export function filterWord(data) {
-
-    var searchTerm = /miksi/i
+export function filterWord(data, searchterm) {
+    console.log(searchterm, "search term!")
+    // var aputerm = /miks/i
+    var aputerm = new RegExp(searchterm)
+    // console.log(aputerm,"aputerm")
+    console.log(aputerm,"regexi")
 
     var blanko = /\s{1,1}/
     var selectedFeedback = [];
     var feedbackFilter = data.map((item) => {
-        if (searchTerm.test(item.description)) {
-            console.log(item)
-            var position = item.description.search(searchTerm)
+        if (aputerm.test(item.description)) {
+            // console.log(item)
+            var position = item.description.search(aputerm)
             var whitespace = item.description.substr(position).search(whitespace)
             if (whitespace === -1) { whitespace = undefined }
             // var newString = item.description.substr(position, whitespace)
-            console.log(position,"Position of", searchTerm, "| Whitespace position", whitespace)
+            // console.log(position,"Position of", searchTerm, "| Whitespace position", whitespace)
             // console.log(newString,"newString Item")
             selectedFeedback.push(item.description)
             return item.description;
@@ -63,8 +66,8 @@ export function filterWord(data) {
     }
     )
 
-    console.log(feedbackFilter,"<- Feedback Filter")
-    console.log(selectedFeedback,"<- Randoes")
+    // console.log(feedbackFilter,"<- Feedback Filter")
+    // console.log(selectedFeedback,"<- Randoes")
     return feedbackFilter;
 
 }
