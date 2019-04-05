@@ -44,11 +44,11 @@ export function regExPortal(data) {
 
 export function filterWord(data) {
 
-    var searchTerm = /kiitos/i
+    var searchTerm = /miksi/i
 
     var blanko = /\s{1,1}/
-
-    var wordsWithThanks = data.map((item) => {
+    var selectedFeedback = [];
+    var feedbackFilter = data.map((item) => {
         if (searchTerm.test(item.description)) {
             console.log(item)
             var position = item.description.search(searchTerm)
@@ -57,12 +57,14 @@ export function filterWord(data) {
             // var newString = item.description.substr(position, whitespace)
             console.log(position,"Position of", searchTerm, "| Whitespace position", whitespace)
             // console.log(newString,"newString Item")
+            selectedFeedback.push(item.description)
             return item.description;
         }
     }
     )
 
-    console.log(wordsWithThanks,"wordswiththanks")
-    return wordsWithThanks;
+    console.log(feedbackFilter,"<- Feedback Filter")
+    console.log(selectedFeedback,"<- Randoes")
+    return feedbackFilter;
 
 }

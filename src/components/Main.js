@@ -31,23 +31,20 @@ class Main extends Component {
                 this.state.startDate,
                 this.state.endDate)
                 .then((data) => {
+                    // filterWord(data)
         // ProgresBar point #3
-                    console.log(data,"getAllServiceRequests data before setState")
-                    // this.setState({ serviceRequests: data }) 
-                    // regExPortal(data);
-                    var kiitokset = filterWord(data)
-                        setTimeout(() => {
-                        this.setState({serviceRequests:kiitokset })
-                    }, 3000);
+                    console.log(data,"getAllServiceRequests data before setState")             
+                        this.setState({serviceRequests:filterWord(data) })
+                    
                 })
 
                 
     }
-    regExDemoF = () => {
+    // regExDemoF = () => {
 
-        var hevonen = "hevonen"
-        regExPortal(hevonen);
-    }
+    //     var hevonen = "hevonen"
+    //     regExPortal(hevonen);
+    // }
         
     callbackFunction = (data) => {
         // console.log(data, "Callback fired, Main.js")
@@ -68,6 +65,7 @@ class Main extends Component {
     // hakunäppäin
     btnSearch = (e) => {
         e.preventDefault();
+        console.log(this.state,"<- State haku hetkellä")
         this.showResults();
 
     }
@@ -75,7 +73,7 @@ class Main extends Component {
 
     render() {
         
-        // Kommentoitu pois kehittämisen ajaksi :D
+        // Koodaa tää paremmin :D
         if (this.state.serviceRequests !== undefined) {
             
             var feedbackStories = this.state.serviceRequests.map((value) => {
@@ -93,7 +91,7 @@ class Main extends Component {
                 <div className="TopContent">
                     <div className="InnerTopContent">
                         <h1>Hello world!</h1>
-                        {/* <SelectServiceType callback={this.callbackFunction} /> */}
+                        <SelectServiceType callback={this.callbackFunction} />
                         <SelectStatus callback={this.callbackFunction} />
                         <SelectTimeRange callback={this.callbackFunction} />
                         {/* <PrintServiceRequests callback={this.callbackFunction}/> */}
