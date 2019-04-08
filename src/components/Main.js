@@ -153,7 +153,7 @@ class Main extends Component {
         return (
             <div className="FeedBackStories">
                 <div className="TopContent">
-                    <h8>Katsele kaupungin palautteita - Lisätietoa info-napin takana!</h8>
+                    <h6>Katsele kaupungin palautteita - Lisätietoa info-napin takana!</h6>
                     <div className="SearchButton">
                         <Button variant="outline-light" onClick={this.btnSearch} value={this.state.searchTerm}>Hae!</Button>
                         &nbsp;
