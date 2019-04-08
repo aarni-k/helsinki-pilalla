@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import Button from 'react-bootstrap/Button';
 
-
+// Component renders selectors for the search time-range
+// TODO - Make more relevant time-range options (previous years) to utilize the API more
 
 class SelectTimeRange extends Component {
 
@@ -26,9 +27,6 @@ class SelectTimeRange extends Component {
         start_date.setMonth(start_date.getMonth() - numberOfMonthsToGoBack);
         start_date = start_date.toISOString();
 
-        // start_date = start_date.toISOString();
-        console.log(end_date,"End Date")
-        console.log(start_date,"Start Date")
         this.props.callback({callbackid:"timerange",end_date,start_date, timeRange})
     }
 

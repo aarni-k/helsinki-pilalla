@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Button from 'react-bootstrap/Button';
 
+// Component renders a selector Button for open/closed search term
+
 class SelectStatus extends Component {
 
     btnClick = (e) => {

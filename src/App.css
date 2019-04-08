@@ -1,9 +1,18 @@
+/* // TODO - See the whole div-structure through and make this more flexible */
+
 .App {
   text-align: center;
+  /* height:100vh; */
   color:white;
   background-color: hsl(220, 13%, 18%);
   /* height:100vh; */
   
+}
+
+.BottomFiller{
+  background-color: hsl(220, 13%, 18%);
+  height:200px;
+
 }
 
 
@@ -67,6 +76,7 @@ color: white;
   /* width:50vw; */
   color:white;
   background-color: #282c34;
+
 }
 
 .CollapsedFeedback{

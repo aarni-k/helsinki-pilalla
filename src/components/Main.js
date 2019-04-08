@@ -1,22 +1,21 @@
 import React, { Component } from 'react';
 import SelectServiceType from './SelectServiceType';
-// import PrintServiceRequests from './PrintServiceRequests';
 import SelectStatus from './SelectStatus';
 import SelectTimeRange from './SelectTimeRange';
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form';
 import { getAllServiceRequests } from './serviceclient';
-import { regExPortal, filterWord } from './regexclient';
+import { filterWord } from './regexclient';
 import Popover from 'react-bootstrap/Popover'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 import FeedbackStory from './FeedbackStory';
 import ProgresBar from 'react-bootstrap/ProgressBar';
 
-
-
-// Lisää etusivulle progresbar & viestit haun etenemisestä
-// Kato Meaningcloud // Googlen joku ajatusAPI
-// Korjaa CSS tyylit
+// Main page compiles all the components together
+// TODO - Make ProgressBar more relevant
+// TODO - Create better categorization of the search options
+// TODO - Make the page more pleasent to the eye (it's so dark)
+// TODO - Make these selectors into lambdas/ternieries in the future // Use ToggleButtons
 
 class Main extends Component {
     state = {
@@ -34,39 +33,24 @@ class Main extends Component {
 
 
     componentDidMount() {
-        //Demon ajaksi pois
-
         this.showResults();
-        // this.regExDemoF();
-        console.log(this.state, "STATE DID MOUNT")
     }
-
+    // showResults sends out GET to API and then send the data to regEx function to filter out the results
     showResults = () => {
         this.setState({ progress: 33, progressLabel: "Soitellaan kaupungille" })
-        // ProgressBar point #1
-        // console.log(this.state.searchTerm, "search-term-show-results")
         getAllServiceRequests(this.state.status,
             this.state.serviceCode,
             this.state.startDate,
             this.state.endDate)
             .then((data) => {
                 this.setState({ progress: 66, progressLabel: "Putsataan vastauksia" })
-                // filterWord(data)
-                // ProgresBar point #3
                 var searchterm = this.state.searchTerm
-                // console.log(data, "getAllServiceRequests data before setState")
                 this.setState({ serviceRequests: filterWord(data, searchterm), progress: 100, progressLabel: "Valmis!" })
 
             })
 
 
     }
-    // RegEx - one word finder test
-    // regExDemoF = () => {
-
-    //     var hevonen = "hevonen"
-    //     regExPortal(hevonen);
-    // }
 
     callbackFunction = (data) => {
         // console.log(data, "Callback fired, Main.js")
@@ -84,10 +68,6 @@ class Main extends Component {
         }
     }
 
-
-
-
-    // hakunäppäin
     btnSearch = (e) => {
         e.preventDefault();
         this.setState({ progress: 0, progressLabel: "Aloitetaan haku" })
@@ -96,7 +76,6 @@ class Main extends Component {
 
     }
 
-    // filter bar functions
     filterChanged = (e) => {
         this.setState({ searchTerm: e.target.value })
     }
@@ -106,7 +85,6 @@ class Main extends Component {
         var progress = 0
 
 
-        // Make these selectors into lambdas in the future // Make all buttons ToggleButtons
         var selectedServiceCode = ""
         if (this.state.serviceCode === "notUsed") { selectedServiceCode = "Kaikki palvelut" }
         else { selectedServiceCode = this.state.serviceCodeString }
@@ -120,7 +98,7 @@ class Main extends Component {
         else { selectedTimeRange = this.state.timeRangeString }
 
         var selectedSearchTerm = ""
-        if (this.state.searchTerm === "") selectedSearchTerm = "Suodatetaan palaute, jossa esiintyy merkkijono"
+        if (this.state.searchTerm === "") selectedSearchTerm = "Suodatetaan palaute, josta löytyy merkkijono"
         else { selectedSearchTerm = `Suodatetaan palaute, jossa esiintyy annettu merkkijono "${this.state.searchTerm}"` }
 
         var selectedSearchResults = ""
@@ -129,11 +107,8 @@ class Main extends Component {
         if (this.state.serviceRequests !== undefined && this.state.serviceRequests.length === 0) { selectedSearchResults = "Ei hakutuloksia" }
 
 
-        // console.log(this.state.serviceRequests)
-        // Koodaa tää paremmin :D
+        // TODO - See if this could be done with the first IF statement
         if (this.state.serviceRequests !== undefined) {
-
-
 
             var feedbackStories = this.state.serviceRequests.map((value) => {
                 if (value !== undefined && value.description !== "") {
@@ -143,15 +118,10 @@ class Main extends Component {
                         </div>
                     )
                 }
-
             })
-
-
         }
 
-
-
-        // For entertaiment purposes only
+        // PopOver to display Info Button text
         const popover = (
             <Popover id="popover-basic" title="HELSINKI-PILALLA ">
                 <p>Sivusto on tehty harjoitusmielessä käyttäen hyväksi <a href="https://dev.hel.fi/apis/open311/" target="_blank" rel="noopener noreferrer">dev.hel.fi Open311</a>  API:a.
@@ -170,7 +140,6 @@ class Main extends Component {
                         </ul>
                     </list>
                     <strong>-Aarni</strong></p>
-
             </Popover>
         );
 
@@ -179,16 +148,13 @@ class Main extends Component {
                 <Button variant="outline-light">Info</Button>
             </OverlayTrigger>
         );
-        console.log(selectedServiceCode, "current service code", this.state.serviceCode, "state service code")
 
-        // console.log(this.state, "State in render, Main.js")
+
         return (
             <div className="FeedBackStories">
                 <div className="TopContent">
                     <h8>Katsele kaupungin palautteita - Lisätietoa info-napin takana!</h8>
                     <div className="SearchButton">
-
-
                         <Button variant="outline-light" onClick={this.btnSearch} value={this.state.searchTerm}>Hae!</Button>
                         &nbsp;
                         <MoreInfo />
@@ -219,7 +185,6 @@ class Main extends Component {
                             <SelectTimeRange callback={this.callbackFunction} />
                         </div>
                     </div>
-                    {/* <PrintServiceRequests callback={this.callbackFunction}/> */}
                 </div>
                 <div className="FeedBackStories">
                     <h4>{selectedSearchResults}</h4>
@@ -229,7 +194,4 @@ class Main extends Component {
         );
     }
 }
-
-
-
 export default Main;
