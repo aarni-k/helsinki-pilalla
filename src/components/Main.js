@@ -10,6 +10,7 @@ import { regExPortal, filterWord } from './regexclient';
 import Popover from 'react-bootstrap/Popover'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 import FeedbackStory from './FeedbackStory';
+import ProgresBar from 'react-bootstrap/ProgressBar';
 
 
 
@@ -26,17 +27,22 @@ class Main extends Component {
         endDate: "notUsed",
         timeRangeString: "notUsed",
         searchTerm: "",
+        progress: 100,
+        progressLabel: "Valmista",
         välitulokset: []
     }
 
+
     componentDidMount() {
         //Demon ajaksi pois
+
         this.showResults();
         // this.regExDemoF();
         console.log(this.state, "STATE DID MOUNT")
     }
 
     showResults = () => {
+        this.setState({ progress: 33, progressLabel: "Soitellaan kaupungille" })
         // ProgressBar point #1
         // console.log(this.state.searchTerm, "search-term-show-results")
         getAllServiceRequests(this.state.status,
@@ -44,11 +50,12 @@ class Main extends Component {
             this.state.startDate,
             this.state.endDate)
             .then((data) => {
+                this.setState({ progress: 66, progressLabel: "Putsataan vastauksia" })
                 // filterWord(data)
                 // ProgresBar point #3
                 var searchterm = this.state.searchTerm
                 // console.log(data, "getAllServiceRequests data before setState")
-                this.setState({ serviceRequests: filterWord(data, searchterm) })
+                this.setState({ serviceRequests: filterWord(data, searchterm), progress: 100, progressLabel: "Valmis!" })
 
             })
 
@@ -83,6 +90,7 @@ class Main extends Component {
     // hakunäppäin
     btnSearch = (e) => {
         e.preventDefault();
+        this.setState({ progress: 0, progressLabel: "Aloitetaan haku" })
         console.log(this.state, "<- State haku hetkellä")
         this.showResults();
 
@@ -95,6 +103,9 @@ class Main extends Component {
 
 
     render() {
+        var progress = 0
+
+
         // Make these selectors into lambdas in the future // Make all buttons ToggleButtons
         var selectedServiceCode = ""
         if (this.state.serviceCode === "notUsed") { selectedServiceCode = "Kaikki palvelut" }
@@ -142,16 +153,28 @@ class Main extends Component {
 
         // For entertaiment purposes only
         const popover = (
-            <Popover id="popover-basic" title="Tech Info ">
-                <ul>
-                    <li>Open311 API</li>
-                    <li>React</li>
-                    <li>RegEx</li>
-                </ul>
+            <Popover id="popover-basic" title="HELSINKI-PILALLA ">
+                <p>Sivusto on tehty harjoitusmielessä käyttäen hyväksi <a href="https://dev.hel.fi/apis/open311/" target="_blank" rel="noopener noreferrer">dev.hel.fi Open311</a>  API:a.
+                    Hakutoiminto on toteutettu regEx:llä ja kaupungin vastauksista on poistettu
+                    kaikki teksti "Ystävällisin terveisin" kohdan jälkeen. API palauttaa joko 200 ensimmäistä tulosta
+                    tai, jos valittuna, tulokset maksimissaan 90 päivän ajalta. Palvelulistaus on rakennettu API:n pohjalta.
+                    Jatkossa on tarkoitus lisätä erilaisia valmiita hakuja (esimerkiksi vuosihaut) sekä aihesuodattimia
+                    kuten roskakorit, siirtokehoitukset jne. Lähdekoodi löytyy <a href="https://github.com/aarni-k/helsinki-pilalla/" target="_blank" rel="noopener noreferrer">GitHubista</a>
+                    <br /><br />
+                    <list>
+                        <strong>Toteutus</strong>
+                        <ul>
+                            <li>ReactJS & React-Bootstrap</li>
+                            <li>dev.hel.fi Open311 API</li>
+                            <li>JavaScript RegEx</li>
+                        </ul>
+                    </list>
+                    <strong>-Aarni</strong></p>
+
             </Popover>
         );
 
-        const Example = () => (
+        const MoreInfo = () => (
             <OverlayTrigger trigger="click" placement="right" overlay={popover}>
                 <Button variant="outline-light">Info</Button>
             </OverlayTrigger>
@@ -162,12 +185,17 @@ class Main extends Component {
         return (
             <div className="FeedBackStories">
                 <div className="TopContent">
+                    <h8>Katsele kaupungin palautteita - Lisätietoa info-napin takana!</h8>
                     <div className="SearchButton">
+
+
                         <Button variant="outline-light" onClick={this.btnSearch} value={this.state.searchTerm}>Hae!</Button>
                         &nbsp;
-                        <Example />
+                        <MoreInfo />
                     </div>
                     <div className="SearchBar">
+                        <ProgresBar variant="dark" now={this.state.progress} label={this.state.progressLabel} />
+                        <br />
                         <h4>{selectedSearchTerm}</h4>
                         <Form>
                             <Form.Group>

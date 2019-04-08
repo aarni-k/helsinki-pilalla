@@ -1,6 +1,7 @@
 .App {
   text-align: center;
-  background-color: #282c34;
+  color:white;
+  background-color: hsl(220, 13%, 18%);
   /* height:100vh; */
   
 }
@@ -38,11 +39,15 @@ color: white;
 .SearchBar{
   margin:1%;
   color:white;
+  padding-right: 20vw;
+  padding-left: 20vw;
 }
 
 .ServiceType{
   color: white;
-  margin:1%
+  margin:1%;
+  padding-right: 20vw;
+  padding-left: 20vw;
 }
 .SelectStatus{
   color: white;
@@ -62,5 +67,8 @@ color: white;
   /* width:50vw; */
   color:white;
   background-color: #282c34;
+}
+
+.CollapsedFeedback{
 
 }

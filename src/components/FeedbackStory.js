@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import Button from 'react-bootstrap/Button'
-import Collapse from 'react-bootstrap/Collapse'
+import Button from 'react-bootstrap/Button';
+import Collapse from 'react-bootstrap/Collapse';
+import Image from 'react-bootstrap/Image';
 
 class FeedbackStory extends Component {
     state = {open:false}
@@ -40,6 +41,7 @@ class FeedbackStory extends Component {
                   <div id="example-collapse-text">
                  <h5>Palautteen päiväys: {recievedDate}</h5>
                  <p>{this.props.storyItem.description}</p>
+                 {(this.props.storyItem.media_url !== null) ? <Image src={this.props.storyItem.media_url} width="33%" height="33%" rounded /> : ""}
                  {(this.props.storyItem.status === "closed") ? <h5>Vastauksen päiväys: {replyDate}</h5> : <h6>Vastaava yksikkö: {this.props.storyItem.agency_responsible}</h6>}
                  {(this.props.storyItem.status === "closed") ? <p>{this.props.storyItem.status_notes.substring(0,stringEnder)}</p> : ""}
                  {(this.props.storyItem.status === "closed") ? <h6>Vastaava yksikkö: {this.props.storyItem.agency_responsible}</h6> : ""}
