@@ -11,6 +11,7 @@ import Popover from 'react-bootstrap/Popover'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 
 
+
 // Lisää etusivulle progresbar & viestit haun etenemisestä
 // Kato Meaningcloud // Googlen joku ajatusAPI
 // Korjaa CSS tyylit
@@ -19,8 +20,10 @@ class Main extends Component {
     state = {
         status: "closed",
         serviceCode: "notUsed",
+        serviceCodeString: "notUsed",
         startDate: "notUsed",
         endDate: "notUsed",
+        timeRangeString: "notUsed",
         searchTerm: "",
         välitulokset: []
     }
@@ -29,6 +32,7 @@ class Main extends Component {
         //Demon ajaksi pois
         this.showResults();
         // this.regExDemoF();
+        console.log(this.state, "STATE DID MOUNT")
     }
 
     showResults = () => {
@@ -49,28 +53,31 @@ class Main extends Component {
 
 
     }
-    // RegEx one word finder test
-    regExDemoF = () => {
+    // RegEx - one word finder test
+    // regExDemoF = () => {
 
-        var hevonen = "hevonen"
-        regExPortal(hevonen);
-    }
+    //     var hevonen = "hevonen"
+    //     regExPortal(hevonen);
+    // }
 
     callbackFunction = (data) => {
         // console.log(data, "Callback fired, Main.js")
-        if (data.status !== undefined) {
+        if (data.callbackid === "status") {
             // console.log(data, "status incoming")
             this.setState({ status: data.status })
         }
         if (data.callbackid === "servicecode") {
             // console.log(data, "service_request id incoming")
-            this.setState({ serviceCode: data.service_code })
+            this.setState({ serviceCode: data.service_code, serviceCodeString: data.serviceCodeString })
         }
         if (data.callbackid === "timerange") {
             // console.log(data, "timerange incoming")
-            this.setState({ startDate: data.start_date, endDate: data.end_date })
+            this.setState({ startDate: data.start_date, endDate: data.end_date, timeRangeString: data.timeRange })
         }
     }
+
+
+
 
     // hakunäppäin
     btnSearch = (e) => {
@@ -87,21 +94,52 @@ class Main extends Component {
 
 
     render() {
-        console.log(this.state)
+        // Make these selectors into lambdas in the future // Make all buttons ToggleButtons
+        var selectedServiceCode = ""
+        if (this.state.serviceCode === "notUsed") { selectedServiceCode = "Kaikki palvelut" }
+        else { selectedServiceCode = this.state.serviceCodeString }
+
+        var selectedStatus = ""
+        if (this.state.status === "closed") { selectedStatus = "Suljettu" }
+        else { selectedStatus = "Avoinna" }
+
+        var selectedTimeRange = ""
+        if (this.state.timeRangeString === "notUsed") { selectedTimeRange = "Ei aikaväliä" }
+        else { selectedTimeRange = this.state.timeRangeString }
+
+        var selectedSearchTerm = ""
+        if (this.state.searchTerm === "") selectedSearchTerm = "Suodatetaan palaute, jossa esiintyy merkkijono"
+        else { selectedSearchTerm = `Suodatetaan palaute, jossa esiintyy annettu merkkijono "${this.state.searchTerm}"` }
+
+        var selectedSearchResults = ""
+        if (this.state.serviceRequests === undefined) {selectedSearchResults = "Ladataan sivustoa"}
+        if (this.state.serviceRequests !== undefined && this.state.serviceRequests.length !== 0) selectedSearchResults = `Hakutuloksia yhteensä ${this.state.serviceRequests.length}`
+        if (this.state.serviceRequests !== undefined && this.state.serviceRequests.length === 0) {selectedSearchResults = "Ei hakutuloksia"}
+
+
+        // console.log(this.state.serviceRequests)
         // Koodaa tää paremmin :D
         if (this.state.serviceRequests !== undefined) {
+                
+          
 
-            var feedbackStories = this.state.serviceRequests.map((value) => {
-                if (value !== undefined) {
-                    return (
-                        <div className="FeedBackItem">
-                            <Button variant="outline-light" key={value.index}>{value}</Button>
-                        </div>
-                    )
-                }
+                var feedbackStories = this.state.serviceRequests.map((value) => {
+                    if (value !== undefined) {
+                        return (
+                            <div className="FeedBackItem">
+                      
+                                <Button variant="outline-light" key={value.index}>{value}</Button>
+                            </div>
+                        )
+                    }
 
-            })
+                })
+            
+         
         }
+
+
+
         // For entertaiment purposes only
         const popover = (
             <Popover id="popover-basic" title="Tech Info ">
@@ -118,7 +156,7 @@ class Main extends Component {
                 <Button variant="outline-light">Info</Button>
             </OverlayTrigger>
         );
-
+        console.log(selectedServiceCode, "current service code", this.state.serviceCode, "state service code")
 
         // console.log(this.state, "State in render, Main.js")
         return (
@@ -127,9 +165,10 @@ class Main extends Component {
                     <div className="SearchButton">
                         <Button variant="outline-light" onClick={this.btnSearch} value={this.state.searchTerm}>Hae!</Button>
                         &nbsp;
-                        <Example></Example>
+                        <Example />
                     </div>
                     <div className="SearchBar">
+                        <h4>{selectedSearchTerm}</h4>
                         <Form>
                             <Form.Group>
                                 <Form.Control size="lg" type="text" placeholder="Suodatin" onChange={this.filterChanged} />
@@ -138,19 +177,24 @@ class Main extends Component {
                     </div>
                     <div className="InnerTopContent">
                         <div className="ServiceType">
+                            <h4>Valittuna: {selectedServiceCode} </h4>
                             <SelectServiceType callback={this.callbackFunction} />
                         </div>
+                    </div>
+                    <div className="InnerTopContent">
                         <div className="SelectStatus">
+                            <h4>Valittuna: {selectedStatus}</h4>
                             <SelectStatus callback={this.callbackFunction} />
                         </div>
                         <div className="TimeRange">
-
+                            <h4>Valittuna: {selectedTimeRange}</h4>
                             <SelectTimeRange callback={this.callbackFunction} />
                         </div>
-                        {/* <PrintServiceRequests callback={this.callbackFunction}/> */}
                     </div>
+                    {/* <PrintServiceRequests callback={this.callbackFunction}/> */}
                 </div>
                 <div className="FeedBackStories">
+               <h4>{selectedSearchResults}</h4> 
                     {feedbackStories}
                 </div>
             </div>

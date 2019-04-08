@@ -19,8 +19,9 @@ class SelectServiceType extends Component {
 
     btnSelectService = (e) => {
         e.preventDefault();
-        if (e.target.value === "selectAll") { return this.props.callback({callbackid:"servicecode",service_code:"notUsed"})}
-        this.props.callback({callbackid:"servicecode",service_code:e.target.value})
+        console.log(e.target,"target!")
+        if (e.target.value === "selectAll") { return this.props.callback({callbackid:"servicecode",service_code:"notUsed", serviceCodeString:"notUsed"})}
+        this.props.callback({callbackid:"servicecode",service_code:e.target.value,serviceCodeString:e.target.id})
         console.log(e.target.value,"selected service code")
 
     }
@@ -30,7 +31,7 @@ class SelectServiceType extends Component {
     render() {
         const serviceItems = this.state.serviceList.map(
             (values) => {
-            return <Button variant="outline-light" key={values.service_code} onClick={this.btnSelectService} value={values.service_code}>{values.service_name}</Button>
+            return <Button variant="outline-light" key={values.service_code} onClick={this.btnSelectService} id={values.service_name} value={values.service_code}>{values.service_name}</Button>
             }
             )
         return (

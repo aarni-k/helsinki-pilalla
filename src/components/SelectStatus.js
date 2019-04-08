@@ -5,7 +5,8 @@ class SelectStatus extends Component {
 
     btnClick = (e) => {
         e.preventDefault();
-        this.props.callback({status:e.target.value})
+        console.log(e.target.value,"Status btn value!")
+        this.props.callback({callbackid:"status", status:e.target.value})
     }
 
     render() {

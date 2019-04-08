@@ -6,17 +6,18 @@ import Button from 'react-bootstrap/Button';
 class SelectTimeRange extends Component {
 
     componentDidMount(){
-        this.props.callback({callbackid:"timerange",end_date:"notUsed", start_date:"notUsed"})
+        this.props.callback({callbackid:"timerange",end_date:"notUsed", start_date:"notUsed", timeRange:"notUsed"})
     }
 
     dateSelector = (e) => {
         e.preventDefault();     
+        var timeRange = "notUsed"
         if (e.target.value === "NoDate"){
-        return this.props.callback({callbackid:"timerange",end_date:"notUsed", start_date:"notUsed"})
+        return this.props.callback({callbackid:"timerange",end_date:"notUsed", start_date:"notUsed", timeRange})
         }
-        if (e.target.value === "30") {var numberOfMonthsToGoBack = 1}
-        if (e.target.value === "60") { numberOfMonthsToGoBack = 2}
-        if (e.target.value === "90") { numberOfMonthsToGoBack = 3}
+        if (e.target.value === "30") {var numberOfMonthsToGoBack = 1; timeRange = "Edelliset 30 päivää"}
+        if (e.target.value === "60") { numberOfMonthsToGoBack = 2; timeRange = "Edelliset 60 päivää"}
+        if (e.target.value === "90") { numberOfMonthsToGoBack = 3; timeRange = "Edelliset 90 päivää"}
 
         var end_date = new Date();
         end_date = end_date.toISOString();
@@ -28,7 +29,7 @@ class SelectTimeRange extends Component {
         // start_date = start_date.toISOString();
         console.log(end_date,"End Date")
         console.log(start_date,"Start Date")
-        this.props.callback({callbackid:"timerange",end_date,start_date})
+        this.props.callback({callbackid:"timerange",end_date,start_date, timeRange})
     }
 
 

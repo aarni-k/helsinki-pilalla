@@ -27,7 +27,7 @@
 }
 
 .InnerTopContent{
-  display:flex;
+  /* display:flex; */
 }
 
 .SearchButton{
@@ -35,14 +35,22 @@ margin:1%;
 color: white;
 }
 
+.SearchBar{
+  margin:1%;
+  color:white;
+}
+
 .ServiceType{
+  color: white;
   margin:1%
 }
 .SelectStatus{
+  color: white;
   margin:1%
 }
 
 .TimeRange{
+  color: white;
   margin:1%
 }
 
@@ -52,6 +60,7 @@ color: white;
 .FeedBackStories{
   height:100%;
   /* width:50vw; */
+  color:white;
   background-color: #282c34;
 
 }

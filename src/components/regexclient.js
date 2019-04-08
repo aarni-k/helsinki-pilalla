@@ -45,31 +45,33 @@ export function regExPortal(data) {
 
 export function filterWord(data, searchterm) {
     console.log(searchterm, "search term!")
-    // var aputerm = /miks/i
-    var aputerm = new RegExp(searchterm)
-    // console.log(aputerm,"aputerm")
-    console.log(aputerm,"<- Filtteri RegEx lause")
+    var regExSearchTerm = new RegExp(searchterm)
+    console.log(regExSearchTerm,"<- regExSearchTerm")
 
     // var blanko = /\s{1,1}/
     var selectedFeedback = [];
+    console.log(data, "filtteröitävä data")
     var feedbackFilter = data.map((item) => {
-        if (aputerm.test(item.description)) {
+        if (regExSearchTerm.test(item.description)) {
             // console.log(item)
-            var position = item.description.search(aputerm)
+            var position = item.description.search(regExSearchTerm)
             var whitespace = item.description.substr(position).search(whitespace)
             if (whitespace === -1) { whitespace = undefined }
             // var newString = item.description.substr(position, whitespace)
             // console.log(position,"Position of", searchTerm, "| Whitespace position", whitespace)
             // console.log(newString,"newString Item")
+            
+
             selectedFeedback.push(item.description)
             return item.description;
         }
     }
     )
     console.log("Filtteröimätömiä tuloksia", data.length,"kpl")
-    console.log("Filtteriin jäi",feedbackFilter.length,"kpl")
+    console.log(selectedFeedback, "Selected feedback")
+    console.log("Filtteriin jäi",selectedFeedback.length,"kpl")
     // console.log(feedbackFilter,"<- Feedback Filter")
     // console.log(selectedFeedback,"<- Randoes")
-    return feedbackFilter;
+    return selectedFeedback;
 
 }
