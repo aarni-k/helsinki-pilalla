@@ -11,8 +11,8 @@ class SelectStatus extends Component {
     render() {
         return (
             <React.Fragment>
-                <Button variant="outline-light" value="open" onClick={this.btnClick}>Open</Button>
-                <Button variant="outline-light" value="closed" onClick={this.btnClick}>Closed</Button>  
+                <Button variant="outline-light" value="open" onClick={this.btnClick}>Avoinna</Button>
+                <Button variant="outline-light" value="closed" onClick={this.btnClick}>Suljettu</Button>  
             </React.Fragment>
         );
     }

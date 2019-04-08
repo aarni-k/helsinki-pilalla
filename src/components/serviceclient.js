@@ -3,11 +3,11 @@ export function getServiceList(){
     return fetch("https://asiointi.hel.fi/palautews/rest/v1/services.json?locale=fi")
     .then(function(response){
         if (response.statusText === "400") {
-            console.log(response, "error, getServiceList")
+            // console.log(response, "error, getServiceList")
             return "Status 400 - General server error"
         }
         else {
-            console.log(response,"not error, getServiceList")
+            // console.log(response,"not error, getServiceList")
             return response.json();
         }
     }
@@ -33,7 +33,7 @@ export function getAllServiceRequests(status, serviceCode, startDate, endDate){
     if (serviceCode !== "notUsed") {searchTerms += serviceCode}
     if (startDate !== "notUsed" && endDate !== "notUsed") { searchTerms += startDate + endDate}
 
-    console.log(apiBase + searchTerms,"Search Url")
+    // console.log(apiBase + searchTerms,"Search Url")
     return fetch (apiBase+searchTerms)
     .then(function(response){
         return response.json();

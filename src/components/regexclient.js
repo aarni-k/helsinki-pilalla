@@ -1,6 +1,6 @@
 export function regExPortal(data) {
     // Search term 
-    var searchTerm = /Kiitos/i
+    var searchTerm = /kii/i
     // Finds the next whitespace
     var whitespace = /\s{1,1}/
     // Test array in finnish to play around with regEx
@@ -29,13 +29,14 @@ export function regExPortal(data) {
 
             // Creates a new string by using positions of the found searchTerm and next whitespace (or undefined if it is the last word)
             var newString = item.a.substr(item.a.search(searchTerm), whitespace)
-
+            
             // Own notes in Finnish
             console.log(item.a, "<-", searchTerm + " regEx lause, sana löytyi indexillä", position, "seuraavaan whitespaceen asti teksti:", newString)
             console.log(whitespace, "whitespace result")
             // Returns the string, if nothing found the result is undefined
             return newString
         }
+        // console.log(regDemo)
     }))
 
     //prints the regDemo to console after running
@@ -47,9 +48,9 @@ export function filterWord(data, searchterm) {
     // var aputerm = /miks/i
     var aputerm = new RegExp(searchterm)
     // console.log(aputerm,"aputerm")
-    console.log(aputerm,"regexi")
+    console.log(aputerm,"<- Filtteri RegEx lause")
 
-    var blanko = /\s{1,1}/
+    // var blanko = /\s{1,1}/
     var selectedFeedback = [];
     var feedbackFilter = data.map((item) => {
         if (aputerm.test(item.description)) {
@@ -65,7 +66,8 @@ export function filterWord(data, searchterm) {
         }
     }
     )
-
+    console.log("Filtteröimätömiä tuloksia", data.length,"kpl")
+    console.log("Filtteriin jäi",feedbackFilter.length,"kpl")
     // console.log(feedbackFilter,"<- Feedback Filter")
     // console.log(selectedFeedback,"<- Randoes")
     return feedbackFilter;

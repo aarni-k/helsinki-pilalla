@@ -12,7 +12,7 @@ class SelectServiceType extends Component {
         // this.setState({serviceList:väliresponse})
       
               getServiceList().then(data => { 
-                console.log(data,"Service List")
+                // console.log(data,"Service List")
                 this.setState({serviceList:data})
             })
 }

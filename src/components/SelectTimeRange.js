@@ -35,10 +35,10 @@ class SelectTimeRange extends Component {
     render() {
         return (
             <React.Fragment>
-                <Button variant="outline-light" value="NoDate" onClick={this.dateSelector}>No time range</Button>
-                <Button variant="outline-light" value="30" onClick={this.dateSelector}>Past 30 days</Button>
-                <Button variant="outline-light" value="60" onClick={this.dateSelector}>Past 60 days</Button>
-                <Button variant="outline-light" value="90" onClick={this.dateSelector}>Past 90 days</Button>
+                <Button variant="outline-light" value="NoDate" onClick={this.dateSelector}>Ei aikaväliä</Button>
+                <Button variant="outline-light" value="30" onClick={this.dateSelector}>Edelliset 30 päivää</Button>
+                <Button variant="outline-light" value="60" onClick={this.dateSelector}>Edelliset 60 päivää</Button>
+                <Button variant="outline-light" value="90" onClick={this.dateSelector}>Edelliset 90 päivää</Button>
             </React.Fragment>
         );
     }

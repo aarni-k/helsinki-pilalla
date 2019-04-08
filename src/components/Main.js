@@ -1,14 +1,19 @@
 import React, { Component } from 'react';
 import SelectServiceType from './SelectServiceType';
-import PrintServiceRequests from './PrintServiceRequests';
+// import PrintServiceRequests from './PrintServiceRequests';
 import SelectStatus from './SelectStatus';
 import SelectTimeRange from './SelectTimeRange';
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form';
 import { getAllServiceRequests } from './serviceclient';
 import { regExPortal, filterWord } from './regexclient';
+import Popover from 'react-bootstrap/Popover'
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 
 
+// Lisää etusivulle progresbar & viestit haun etenemisestä
+// Kato Meaningcloud // Googlen joku ajatusAPI
+// Korjaa CSS tyylit
 
 class Main extends Component {
     state = {
@@ -16,7 +21,7 @@ class Main extends Component {
         serviceCode: "notUsed",
         startDate: "notUsed",
         endDate: "notUsed",
-        searchTerm:"notUsed",
+        searchTerm: "",
         välitulokset: []
     }
 
@@ -28,7 +33,7 @@ class Main extends Component {
 
     showResults = () => {
         // ProgressBar point #1
-        console.log(this.state.searchTerm,"search-term-show-results")
+        // console.log(this.state.searchTerm, "search-term-show-results")
         getAllServiceRequests(this.state.status,
             this.state.serviceCode,
             this.state.startDate,
@@ -37,18 +42,19 @@ class Main extends Component {
                 // filterWord(data)
                 // ProgresBar point #3
                 var searchterm = this.state.searchTerm
-                console.log(data, "getAllServiceRequests data before setState")
+                // console.log(data, "getAllServiceRequests data before setState")
                 this.setState({ serviceRequests: filterWord(data, searchterm) })
 
             })
 
 
     }
-    // regExDemoF = () => {
+    // RegEx one word finder test
+    regExDemoF = () => {
 
-    //     var hevonen = "hevonen"
-    //     regExPortal(hevonen);
-    // }
+        var hevonen = "hevonen"
+        regExPortal(hevonen);
+    }
 
     callbackFunction = (data) => {
         // console.log(data, "Callback fired, Main.js")
@@ -76,7 +82,7 @@ class Main extends Component {
 
     // filter bar functions
     filterChanged = (e) => {
-        this.setState({searchTerm:e.target.value})
+        this.setState({ searchTerm: e.target.value })
     }
 
 
@@ -89,25 +95,44 @@ class Main extends Component {
                 if (value !== undefined) {
                     return (
                         <div className="FeedBackItem">
-                            <Button variant="outline-light" >{value}</Button>
+                            <Button variant="outline-light" key={value.index}>{value}</Button>
                         </div>
                     )
                 }
 
             })
         }
+        // For entertaiment purposes only
+        const popover = (
+            <Popover id="popover-basic" title="Tech Info ">
+                <ul>
+                    <li>Open311 API</li>
+                    <li>React</li>
+                    <li>RegEx</li>
+                </ul>
+            </Popover>
+        );
+
+        const Example = () => (
+            <OverlayTrigger trigger="click" placement="right" overlay={popover}>
+                <Button variant="outline-light">Info</Button>
+            </OverlayTrigger>
+        );
+
+
         // console.log(this.state, "State in render, Main.js")
         return (
-            <div>
+            <div className="FeedBackStories">
                 <div className="TopContent">
                     <div className="SearchButton">
                         <Button variant="outline-light" onClick={this.btnSearch} value={this.state.searchTerm}>Hae!</Button>
-                        
+                        &nbsp;
+                        <Example></Example>
                     </div>
                     <div className="SearchBar">
                         <Form>
                             <Form.Group>
-                                <Form.Control size="lg" type="text" placeholder="Suodatin" onChange={this.filterChanged}/>
+                                <Form.Control size="lg" type="text" placeholder="Suodatin" onChange={this.filterChanged} />
                             </Form.Group>
                         </Form>
                     </div>
@@ -125,7 +150,7 @@ class Main extends Component {
                         {/* <PrintServiceRequests callback={this.callbackFunction}/> */}
                     </div>
                 </div>
-                <div>
+                <div className="FeedBackStories">
                     {feedbackStories}
                 </div>
             </div>

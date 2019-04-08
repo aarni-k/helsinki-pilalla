@@ -1,7 +1,7 @@
 .App {
   text-align: center;
   background-color: #282c34;
-  height:100vh;
+  /* height:100vh; */
   
 }
 
@@ -48,4 +48,10 @@ color: white;
 
 .FeedBackItem{
   margin:1%
+}
+.FeedBackStories{
+  height:100%;
+  /* width:50vw; */
+  background-color: #282c34;
+
 }
