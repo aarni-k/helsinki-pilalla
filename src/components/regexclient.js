@@ -45,7 +45,7 @@ export function regExPortal(data) {
 
 export function filterWord(data, searchterm) {
     console.log(searchterm, "search term!")
-    var regExSearchTerm = new RegExp(searchterm)
+    var regExSearchTerm = new RegExp(searchterm,"i")
     console.log(regExSearchTerm,"<- regExSearchTerm")
 
     // var blanko = /\s{1,1}/
@@ -61,8 +61,7 @@ export function filterWord(data, searchterm) {
             // console.log(position,"Position of", searchTerm, "| Whitespace position", whitespace)
             // console.log(newString,"newString Item")
             
-
-            selectedFeedback.push(item.description)
+            selectedFeedback.push(item)
             return item.description;
         }
     }

@@ -9,6 +9,7 @@ import { getAllServiceRequests } from './serviceclient';
 import { regExPortal, filterWord } from './regexclient';
 import Popover from 'react-bootstrap/Popover'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
+import FeedbackStory from './FeedbackStory';
 
 
 
@@ -112,30 +113,29 @@ class Main extends Component {
         else { selectedSearchTerm = `Suodatetaan palaute, jossa esiintyy annettu merkkijono "${this.state.searchTerm}"` }
 
         var selectedSearchResults = ""
-        if (this.state.serviceRequests === undefined) {selectedSearchResults = "Ladataan sivustoa"}
+        if (this.state.serviceRequests === undefined) { selectedSearchResults = "Ladataan sivustoa" }
         if (this.state.serviceRequests !== undefined && this.state.serviceRequests.length !== 0) selectedSearchResults = `Hakutuloksia yhteensä ${this.state.serviceRequests.length}`
-        if (this.state.serviceRequests !== undefined && this.state.serviceRequests.length === 0) {selectedSearchResults = "Ei hakutuloksia"}
+        if (this.state.serviceRequests !== undefined && this.state.serviceRequests.length === 0) { selectedSearchResults = "Ei hakutuloksia" }
 
 
         // console.log(this.state.serviceRequests)
         // Koodaa tää paremmin :D
         if (this.state.serviceRequests !== undefined) {
-                
-          
 
-                var feedbackStories = this.state.serviceRequests.map((value) => {
-                    if (value !== undefined) {
-                        return (
-                            <div className="FeedBackItem">
-                      
-                                <Button variant="outline-light" key={value.index}>{value}</Button>
-                            </div>
-                        )
-                    }
 
-                })
-            
-         
+
+            var feedbackStories = this.state.serviceRequests.map((value) => {
+                if (value !== undefined && value.description !== "") {
+                    return (
+                        <div className="FeedBackItem" key={value.service_request_id}>
+                            <FeedbackStory storyItem={value} />
+                        </div>
+                    )
+                }
+
+            })
+
+
         }
 
 
@@ -194,7 +194,7 @@ class Main extends Component {
                     {/* <PrintServiceRequests callback={this.callbackFunction}/> */}
                 </div>
                 <div className="FeedBackStories">
-               <h4>{selectedSearchResults}</h4> 
+                    <h4>{selectedSearchResults}</h4>
                     {feedbackStories}
                 </div>
             </div>
