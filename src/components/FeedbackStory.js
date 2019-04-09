@@ -42,11 +42,15 @@ class FeedbackStory extends Component {
         </Button>
         <Collapse in={this.state.open}>
           <div id="example-collapse-text">
+          <hr/>
             <h5>Palautteen päiväys: {recievedDate}</h5>
-            <p>{this.props.storyItem.description}</p>
-            {(this.props.storyItem.media_url !== null) ? <Image src={this.props.storyItem.media_url} width="33%" height="33%" rounded /> : ""}
+            <p className="StoryDescription">{this.props.storyItem.description}</p>
+            {(this.props.storyItem.lat !== null & this.props.storyItem.long !== null) ? <div className="StoryGmapsLink"> <Button variant="outline-light" href={`https://www.google.com/maps/search/?api=1&query=${this.props.storyItem.lat},${this.props.storyItem.long}`} target="_blank" rel="noopener noreferrer">Avaa palautteen sijainti Google Mapsissa</Button> </div>: ""}
+            
+            {(this.props.storyItem.media_url !== null) ? <div className="StoryMediaEmbed"><Image src={this.props.storyItem.media_url} width="33%" height="33%" rounded /> </div> : ""}
+            
             {(this.props.storyItem.status === "closed") ? <h5>Vastauksen päiväys: {replyDate}</h5> : <h6>Vastaava yksikkö: {this.props.storyItem.agency_responsible}</h6>}
-            {(this.props.storyItem.status === "closed") ? <p>{this.props.storyItem.status_notes.substring(0, stringEnder)}</p> : ""}
+            {(this.props.storyItem.status === "closed") ? <p className="StoryDescription">{this.props.storyItem.status_notes.substring(0, stringEnder)}</p> : ""}
             {(this.props.storyItem.status === "closed") ? <h6>Vastaava yksikkö: {this.props.storyItem.agency_responsible}</h6> : ""}
 
           </div>

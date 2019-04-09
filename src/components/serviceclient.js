@@ -16,7 +16,6 @@ export function getServiceList() {
 
 // GET all service requests with specific service_code from Open311 API
 export function getAllServiceRequests(status, serviceCode, startDate, endDate) {
-    console.log("getAllServiceRequests Fired!")
 
     status = "&status=" + status
 

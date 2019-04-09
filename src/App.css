@@ -28,7 +28,9 @@
 
 .TopContent {
   border-color:white;
-  border-style:solid;
+  border-top-style:solid;
+  border-bottom-style:solid;
+  
   padding-right:1%;
   padding-bottom:1%;
   padding-left:1%;
@@ -80,5 +82,26 @@ color: white;
 }
 
 .CollapsedFeedback{
+  color: white;
+  margin:5%;
+}
 
+.StoryGmapsLink{
+  color: white;
+  margin:1%;
+}
+
+.StoryMediaEmbed{
+  color: white;
+  margin:1%;
+}
+
+.StoryDescription{
+  margin-left:30%;
+  margin-right:30%;
+}
+
+.StoryHeader{
+  color: white;
+  margin:1%;
 }

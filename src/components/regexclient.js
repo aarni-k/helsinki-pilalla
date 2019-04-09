@@ -19,7 +19,7 @@ export function filterWord(data, searchterm) {
         }
     }
     )
-
+    console.log(selectedFeedback, "Seleted results")
     return selectedFeedback;
 
 }

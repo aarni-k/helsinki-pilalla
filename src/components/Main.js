@@ -71,7 +71,6 @@ class Main extends Component {
     btnSearch = (e) => {
         e.preventDefault();
         this.setState({ progress: 0, progressLabel: "Aloitetaan haku" })
-        console.log(this.state, "<- State haku hetkellä")
         this.showResults();
 
     }
@@ -82,9 +81,7 @@ class Main extends Component {
 
 
     render() {
-        var progress = 0
-
-
+       
         var selectedServiceCode = ""
         if (this.state.serviceCode === "notUsed") { selectedServiceCode = "Kaikki palvelut" }
         else { selectedServiceCode = this.state.serviceCodeString }
@@ -165,7 +162,7 @@ class Main extends Component {
                         <h4>{selectedSearchTerm}</h4>
                         <Form>
                             <Form.Group>
-                                <Form.Control size="lg" type="text" placeholder="Suodatin" onChange={this.filterChanged} />
+                                <Form.Control size="lg" type="text" placeholder="Suodatin / Kokeile kiit, niin löydät kiitokset" onChange={this.filterChanged} />
                             </Form.Group>
                         </Form>
                     </div>
