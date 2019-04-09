@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/helsinki-pilalla/precache-manifest.662010987e279f68606dca02d1118172.js"
+  "/helsinki-pilalla/precache-manifest.2f0c2b6933d241ba7742b82f2c2a62ec.js"
 );
 
 workbox.clientsClaim();

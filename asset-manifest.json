@@ -1,13 +1,13 @@
 {
-  "main.css": "/helsinki-pilalla/static/css/main.c8a64f0a.chunk.css",
-  "main.js": "/helsinki-pilalla/static/js/main.730a71a9.chunk.js",
-  "main.js.map": "/helsinki-pilalla/static/js/main.730a71a9.chunk.js.map",
+  "main.css": "/helsinki-pilalla/static/css/main.b3e15d12.chunk.css",
+  "main.js": "/helsinki-pilalla/static/js/main.8c6cb842.chunk.js",
+  "main.js.map": "/helsinki-pilalla/static/js/main.8c6cb842.chunk.js.map",
   "runtime~main.js": "/helsinki-pilalla/static/js/runtime~main.bfcdb760.js",
   "runtime~main.js.map": "/helsinki-pilalla/static/js/runtime~main.bfcdb760.js.map",
   "static/js/2.32d99623.chunk.js": "/helsinki-pilalla/static/js/2.32d99623.chunk.js",
   "static/js/2.32d99623.chunk.js.map": "/helsinki-pilalla/static/js/2.32d99623.chunk.js.map",
   "index.html": "/helsinki-pilalla/index.html",
-  "precache-manifest.662010987e279f68606dca02d1118172.js": "/helsinki-pilalla/precache-manifest.662010987e279f68606dca02d1118172.js",
+  "precache-manifest.2f0c2b6933d241ba7742b82f2c2a62ec.js": "/helsinki-pilalla/precache-manifest.2f0c2b6933d241ba7742b82f2c2a62ec.js",
   "service-worker.js": "/helsinki-pilalla/service-worker.js",
-  "static/css/main.c8a64f0a.chunk.css.map": "/helsinki-pilalla/static/css/main.c8a64f0a.chunk.css.map"
+  "static/css/main.b3e15d12.chunk.css.map": "/helsinki-pilalla/static/css/main.b3e15d12.chunk.css.map"
 }
