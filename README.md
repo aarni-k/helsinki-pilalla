@@ -2,6 +2,10 @@
 Helsinki-Pilalla was created to explore the dev.hel.fi Open311 API that can be used to view public feedback regarding Helsinki.
 Site is created with ReactJS and search functions are done with some basic regular expressions
 
+## site demo
+Website can be tested out at 
+[https://aarni-k.github.io/helsinki-pilalla/](https://aarni-k.github.io/helsinki-pilalla/).
+
 ## 'npm start'
 
 Runs the app in the developement mode.<br>
