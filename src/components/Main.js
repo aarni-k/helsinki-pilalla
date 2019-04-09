@@ -120,7 +120,7 @@ class Main extends Component {
 
         // PopOver to display Info Button text
         const popover = (
-            <Popover id="popover-basic" title="HELSINKI-PILALLA ">
+            <Popover id="popover-basic" title="HELSINKI-PILALLA">
                 <p>Sivusto on tehty harjoitusmielessä käyttäen hyväksi <a href="https://dev.hel.fi/apis/open311/" target="_blank" rel="noopener noreferrer">dev.hel.fi Open311</a>  API:a.
                     Hakutoiminto on toteutettu regEx:llä ja kaupungin vastauksista on poistettu
                     kaikki teksti "Ystävällisin terveisin" kohdan jälkeen. API palauttaa joko 200 ensimmäistä tulosta
@@ -141,7 +141,7 @@ class Main extends Component {
         );
 
         const MoreInfo = () => (
-            <OverlayTrigger trigger="click" placement="right" overlay={popover}>
+            <OverlayTrigger trigger="click" placement="bottom" overlay={popover}>
                 <Button variant="outline-light">Info</Button>
             </OverlayTrigger>
         );
