@@ -4,7 +4,7 @@ import SelectStatus from './SelectStatus';
 import SelectTimeRange from './SelectTimeRange';
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form';
-import { getAllServiceRequests } from './serviceclient';
+import { getAllServiceRequests, getYearlyServiceRequests } from './serviceclient';
 import { filterWord } from './regexclient';
 import Popover from 'react-bootstrap/Popover'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
@@ -70,6 +70,8 @@ class Main extends Component {
 
     btnSearch = (e) => {
         e.preventDefault();
+        var getData = getYearlyServiceRequests(2018);
+        console.log(getData, "GET DATA")
         this.setState({ progress: 0, progressLabel: "Aloitetaan haku" })
         this.showResults();
 
