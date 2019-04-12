@@ -67,7 +67,7 @@ class Main extends Component {
             this.setState({ startDate: data.start_date, endDate: data.end_date, timeRangeString: data.timeRange })
         }
     }
-
+    // Test area for getYearlyServiceRequests
     btnSearch = (e) => {
         e.preventDefault();
         var getData = getYearlyServiceRequests(2018);
